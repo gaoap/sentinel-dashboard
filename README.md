@@ -1,5 +1,5 @@
 # 持久化存储到NACOS修改清单
-分类	完整文件名
+分类	完整文件名  
 后端	pom.xml  
 后端	application.properties  
 后端	com.alibaba.csp.sentinel.dashboard.rule.nacos.NacosPropertiesConfig  
