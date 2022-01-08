@@ -1,4 +1,5 @@
 # 持久化存储到NACOS修改清单
+基于sentinel-dashboard-1.8.2版本修改。修改清单如下：    
 分类	完整文件名  
 后端	pom.xml  
 后端	application.properties  
