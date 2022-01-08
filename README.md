@@ -22,15 +22,11 @@
 后端	com.alibaba.csp.sentinel.dashboard.rule.nacos.system.SystemRuleNacosPublisher  
 后端	com.alibaba.csp.sentinel.dashboard.controller.gateway.GatewayApiController  
 后端	com.alibaba.csp.sentinel.dashboard.controller.gateway.GatewayFlowRuleController  
-后端	com.alibaba.csp.sentinel.dashboard.controller.v2.FlowControllerV2  
+后端	com.alibaba.csp.sentinel.dashboard.controller.FlowControllerV1   
 后端	com.alibaba.csp.sentinel.dashboard.controller.AuthorityRuleController  
 后端	com.alibaba.csp.sentinel.dashboard.controller.DegradeController  
 后端	com.alibaba.csp.sentinel.dashboard.controller.ParamFlowRuleController  
 后端	com.alibaba.csp.sentinel.dashboard.controller.SystemController  
-前端	webapp/resources/app/scripts/directives/sidebar/sidebar.html  
-前端	webapp/resources/app/scripts/services/flow_service_v1.js  
-前端	webapp/resources/app/scripts/controllers/identity.js  
-前端	webapp/resources/app/views/flow_v2.html  
 
 # Sentinel 控制台
 

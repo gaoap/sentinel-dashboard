@@ -30,13 +30,8 @@ app.service('FlowServiceV1', ['$http', function ($http) {
             port: rule.port
         };
 
-        // return $http({
-        //     url: '/v1/flow/rule',
-        //     data: rule,
-        //     method: 'POST'
-        // });
         return $http({
-            url: '/v2/flow/rule',
+            url: '/v1/flow/rule',
             data: rule,
             method: 'POST'
         });
