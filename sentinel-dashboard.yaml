@@ -1,0 +1,66 @@
+# 以Deployment部署Pod
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: sentinel-dashboard
+spec: 
+  selector: 
+    matchLabels: 
+      app: sentinel-dashboard
+  replicas: 1
+  template: 
+    metadata:
+      labels: 
+        app: sentinel-dashboard
+    spec:
+      imagePullSecrets:
+      - name: registry-key
+      containers: 
+      - name: sentinel-dashboard
+        image: registry.cn-beijing.aliyuncs.com/gaoap/sentinel-dashboard:1.8.2
+        ports: 
+        - containerPort: 8080
+        env:
+          - name: SERVER_PORT
+            value: "8080"
+          - name: SENTINEL_NACOS_SERVERADDR
+            value: nacos-headless.nacos.svc.cluster.local:8848
+          - name: SENTINEL_NACOS_NAMESPACE
+            #命名空间ID
+            value:
+          - name: SENTINEL_NACOS_GROUP-ID
+            value: SENTINEL-GROUP
+          - name: AUTH_USERNAME
+            value: gaoyd
+          - name: AUTH_PASSWORD
+            value: gaoyd
+
+---
+# 创建Pod的Service
+apiVersion: v1
+kind: Service
+metadata: 
+  name: sentinel-dashboard
+spec:
+  ports: 
+  - port: 8080
+    name: server
+    protocol: TCP
+    targetPort: 8080
+  selector: 
+    app: sentinel-dashboard
+---
+## 创建Ingress，定义访问规则，一定要记得提前创建好nginx ingress controller
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sentinel-dashboard
+spec:
+  rules:
+  - host: sentinel.gaoap.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sentinel-dashboard
+          servicePort: server

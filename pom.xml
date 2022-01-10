@@ -16,6 +16,9 @@
         <resource.delimiter>@</resource.delimiter>
         <spring.boot.version>2.0.5.RELEASE</spring.boot.version>
         <curator.version>4.0.1</curator.version>
+        <dockerHost>http://127.0.0.1:2375</dockerHost>
+        <auth.username>aliyun@aliyun.com</auth.username>
+        <auth.password>passwrod</auth.password>
     </properties>
 
     <dependencies>
@@ -177,13 +180,46 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>${maven.deploy.version}</version>
                 <configuration>
                     <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.37.0</version>
+                <!--全局配置-->
+                <configuration>
+                    <!--配置远程docker守护进程url-->
+                    <dockerHost>${dockerHost}</dockerHost>
+                    <!--认证配置,用于私有registry认证-->
+                    <!--                    <authConfig>-->
+                    <!--                        <username>admin</username>-->
+                    <!--                        <password>Harbor12345</password>-->
+                    <!--                    </authConfig>-->
+                    <!--镜像相关配置,支持多镜像-->
+                    <images>
+                        <!-- 单个镜像配置 -->
+                        <image>
+                            <!--镜像名(含版本号)-->
+                            <name>registry.cn-beijing.aliyuncs.com/gaoap/${project.name}:${project.version}</name>
+                            <!--registry地址,用于推送,拉取镜像-->
+                            <!--                            <registry>registry.cn-beijing.aliyuncs.com</registry>-->
+                            <!--镜像build相关配置-->
+                            <build>
+                                <!--使用dockerFile文件-->
+                                <dockerFile>${project.basedir}/Dockerfile</dockerFile>
+                            </build>
+                        </image>
+                    </images>
+                    <authConfig>
+                        <username>${auth.username}</username>
+                        <password>${auth.password}</password>
+                    </authConfig>
                 </configuration>
             </plugin>
         </plugins>

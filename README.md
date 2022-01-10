@@ -27,6 +27,8 @@
 后端	com.alibaba.csp.sentinel.dashboard.controller.DegradeController  
 后端	com.alibaba.csp.sentinel.dashboard.controller.ParamFlowRuleController  
 后端	com.alibaba.csp.sentinel.dashboard.controller.SystemController  
+#maven 执行命令
+mvn -DdockerHost=http://192.168.31.135:2375 -D'auth.username'='账号' -D'auth.password'=mima clean package docker:build docker:push  -DskipTests 
 
 # Sentinel 控制台
 
